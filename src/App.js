@@ -28,6 +28,12 @@ class App extends Component{
     .then(users => this.setState({monsters:users}))
   };
 
+  handleChange = (e) => {  
+      //When setState is called and the value is changed
+      //React re-renders our component
+      this.setState({searchField: e.target.value})
+  }
+
   //Returns any HTML Elements we want
   render(){
     //Destructuring
@@ -43,14 +49,7 @@ class App extends Component{
       <h1>Monsters Rolodex</h1>
         <SearchBox
           placeholder = {'search monsters'}
-          handleChange = {e =>{
-            //When setState is called and the value is changed
-            //React re-renders our component
-            this.setState({searchField: e.target.value}, 
-            //This Callback ensures that we print out the current value
-            //of the search field. Otherwise it would print one character
-            //short due to it's asynchronous nature.
-            ()=> console.log(this.state));}}
+          handleChange = {this.handleChange}
         />
         <CardList monsters={filteredMonsters}/>
       </div>
